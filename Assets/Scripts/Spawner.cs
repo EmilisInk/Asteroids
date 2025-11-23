@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Spawner : MonoBehaviour
+{
+    public static int spawnCount;
+
+    public List<GameObject> prefabs;
+    public int amount = 10;
+
+    public Vector2 mapStart = new Vector3(-11, -5);
+    public Vector2 mapEnd = new Vector3(11, -5);
+
+    private void Start()
+    {
+        spawnCount = 0;
+    }
+
+    private void Update()
+    {
+        if (spawnCount < amount)
+        {
+            spawnCount++;
+
+            float x = Random.Range(mapStart.x, mapEnd.x);
+            float y = Random.Range(mapStart.y, mapEnd.y);
+            Vector3 position = new Vector3(x, y, 0f);
+
+            Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+
+            GameObject p = prefabs[Random.Range(0, prefabs.Count)];
+
+            Instantiate(p, position, rotation);
+        }
+    }
+}
