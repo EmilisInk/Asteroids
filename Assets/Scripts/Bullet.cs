@@ -20,8 +20,10 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bullet") || other.CompareTag("Player")) return;
-
-        Destroy(other.gameObject);
+        if(!other.CompareTag("Wall"))
+        {
+            Destroy(other.gameObject);
+        }
         Destroy(gameObject);
     }
 }

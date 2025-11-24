@@ -9,35 +9,40 @@ public class Player : MonoBehaviour
     private Movementt controls;
     private Vector2 moveInput;
 
+    private Rigidbody2D rb;
+
     [Header("Shooting Settings")]
     public Transform bulletSpawn;
     public GameObject bulletPrefab;
     public float fireRate = 0.5f;
-
     public float nextFireTime = 0f;
 
     void Awake()
     {
         controls = new Movementt();
         controls.Move.Enable();
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
         moveInput = controls.Move.Movement.ReadValue<Vector2>();
-        Vector3 movement = new Vector3(moveInput.x, moveInput.y, 0f) * speed * Time.deltaTime;
-        transform.Translate(movement, Space.World);
-
-        if (moveInput != Vector2.zero)
-        {
-            float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
-        }
-
-        if (Time.time >= nextFireTime)
+        if(Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
             Shoot();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(moveInput.x * speed, moveInput.y * speed);
+
+        if(moveInput != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
         }
     }
 
