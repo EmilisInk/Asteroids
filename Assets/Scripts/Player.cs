@@ -38,8 +38,9 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput.x * speed, moveInput.y * speed);
+        rb.angularVelocity = 0f;
 
-        if(moveInput != Vector2.zero)
+        if (moveInput != Vector2.zero)
         {
             float angle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);

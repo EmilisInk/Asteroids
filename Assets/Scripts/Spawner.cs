@@ -12,6 +12,9 @@ public class Spawner : MonoBehaviour
     public Vector2 mapStart = new Vector3(-10, -3,6);
     public Vector2 mapEnd = new Vector3(10, 3,6);
 
+    public Transform player;
+    public float minDistanceFromPlayer = 3f;
+
     private void Start()
     {
         spawnCount = 0;
@@ -19,6 +22,12 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (player == null)
+        {
+            return;
+        }
+
+
         if (spawnCount < amount)
         {
             spawnCount++;
@@ -26,6 +35,8 @@ public class Spawner : MonoBehaviour
             float x = Random.Range(mapStart.x, mapEnd.x);
             float y = Random.Range(mapStart.y, mapEnd.y);
             Vector3 position = new Vector3(x, y, 0f);
+
+            if (Vector3.Distance(position, player.position) < minDistanceFromPlayer) return;
 
             var rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
 

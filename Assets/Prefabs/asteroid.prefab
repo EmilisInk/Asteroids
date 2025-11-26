@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 332424968815544589}
   m_Layer: 0
   m_Name: asteroid
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmmountBig: 10
-  toSpawnPrefab: {fileID: 1458529025620586754, guid: 6cb1a5fe7714f4d4297d0e4c2191833f, type: 3}
+  toSpawnPrefab: {fileID: 3151129016009600265, guid: 6cb1a5fe7714f4d4297d0e4c2191833f, type: 3}
 --- !u!114 &332424968815544589
 MonoBehaviour:
   m_ObjectHideFlags: 0
