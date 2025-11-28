@@ -12,15 +12,12 @@ public class Destroy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            destroySound.PlayOneShot(destroySound.clip, 0.2f);
-            if (!destroySound.isPlaying)
-            {
-                ScoreManager.Instance.AddScore(scoreAmmountBig);
-                Spawner.spawnCount--;
-                Destroy(gameObject);
-                Destroy(other.gameObject);
-                Instantiate(toSpawnPrefab, transform.position, transform.rotation);
-            }
+            AudioSource.PlayClipAtPoint(destroySound.clip, transform.position, 0.2f);
+            ScoreManager.Instance.AddScore(scoreAmmountBig);
+            Spawner.spawnCount--;
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+            Instantiate(toSpawnPrefab, transform.position, transform.rotation);
 
         }
     }

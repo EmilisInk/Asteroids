@@ -11,7 +11,7 @@ public class DestroySmall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            destroySound.PlayOneShot(destroySound.clip, 0.2f);
+            AudioSource.PlayClipAtPoint(destroySound.clip, transform.position, 0.2f);
             ScoreManager.Instance.AddScore(scoreAmmountSmall);
             Destroy(gameObject);
             Destroy(other.gameObject);
