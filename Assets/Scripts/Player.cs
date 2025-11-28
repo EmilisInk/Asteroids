@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float fireRate = 0.5f;
     public float nextFireTime = 0f;
 
+    public AudioSource shootSound;
+
     void Awake()
     {
         controls = new Movementt();
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
+        shootSound.PlayOneShot(shootSound.clip, 0.2f);
         Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
     }
 }

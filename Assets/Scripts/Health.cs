@@ -13,12 +13,13 @@ public class Health : MonoBehaviour
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             health--;
+            Spawner.spawnCount--;
             healthText.text = "Health: " + health.ToString();
             Destroy(collision.gameObject);
             if (health <= 0)
             {
                 Destroy(gameObject);
-                Spawner.spawnCount--;
+                //Spawner.spawnCount--;
                 healthText.text = "Health: 0";
                 HandleGameOver();
             }

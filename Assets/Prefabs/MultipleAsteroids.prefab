@@ -173,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmmountSmall: 5
+  destroySound: {fileID: 4775734007790182320, guid: 73a1972cfc844494d8a836c10620c737, type: 3}
 --- !u!114 &7735433648605992281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmmountSmall: 5
+  destroySound: {fileID: 4775734007790182320, guid: 73a1972cfc844494d8a836c10620c737, type: 3}
 --- !u!114 &1463834565313030093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmmountSmall: 5
+  destroySound: {fileID: 4775734007790182320, guid: 73a1972cfc844494d8a836c10620c737, type: 3}
 --- !u!114 &5059813451903512045
 MonoBehaviour:
   m_ObjectHideFlags: 0

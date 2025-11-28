@@ -30,8 +30,6 @@ public class Spawner : MonoBehaviour
 
         if (spawnCount < amount)
         {
-            spawnCount++;
-
             float x = Random.Range(mapStart.x, mapEnd.x);
             float y = Random.Range(mapStart.y, mapEnd.y);
             Vector3 position = new Vector3(x, y, 0f);
@@ -43,6 +41,8 @@ public class Spawner : MonoBehaviour
             var p = prefabs[Random.Range(0, prefabs.Count)];
 
             Instantiate(p, position, rotation);
+
+            spawnCount++;
         }
     }
 }

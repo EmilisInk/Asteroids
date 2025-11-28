@@ -163,3 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 3
   speed: 10
+  destroySound: {fileID: 1565245134388844351, guid: e5c4b233b4c85754d9224a4b38326c83, type: 3}
