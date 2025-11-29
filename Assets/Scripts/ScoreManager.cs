@@ -37,4 +37,40 @@ public class ScoreManager : MonoBehaviour
             scoreText.text = score.ToString();
         }
     }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (SceneManager.GetActiveScene().name == "MainGame")
+        {
+            scoreText = GameObject.Find("ScoreText").GetComponent<TextMeshProUGUI>();
+
+            ResetScore();
+        }
+        if (SceneManager.GetActiveScene().name == "GameOver")
+        {
+            TextMeshProUGUI finalScoreText = GameObject.Find("FinalScore").GetComponent<TextMeshProUGUI>();
+            if (finalScoreText != null)
+            {
+                finalScoreText.text = "Final Score: " + score.ToString();
+            }
+        }
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        UpdateScoreUI();
+    }
+
+
 }

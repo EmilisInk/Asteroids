@@ -34,6 +34,7 @@ public class Health : MonoBehaviour
 
     private async void HandleGameOver()
     {
+        Timer.Instance.StopTimer();
         await Task.Delay(2000);
         UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
     }

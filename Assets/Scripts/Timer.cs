@@ -5,32 +5,85 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;
+    public static Timer Instance;
 
-    private void Start()
+    public TextMeshProUGUI timerText;
+    private TextMeshProUGUI finalTimeText;
+
+    private float totalTime;
+
+    private bool isRunning = true;
+
+    private void Awake()
     {
-        StartCoroutine(UpdateTimer());
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private IEnumerator UpdateTimer()
+    public void StopTimer()
     {
-        while (true)
-        {
-            float timeElapsed = Time.timeSinceLevelLoad;
-            int minutes = Mathf.FloorToInt(timeElapsed / 60f);
-            int seconds = Mathf.FloorToInt(timeElapsed % 60f);
-
-            timerText.text = string.Format("Time: {0:00}:{1:00}", minutes, seconds);
-
-            yield return new WaitForSeconds(1f);
-        }
+        isRunning = false;
     }
 
     private void Update()
     {
+        if(!isRunning)
+            return;
+
+        totalTime += Time.deltaTime;
+
+        if (timerText != null)
+        {
+            timerText.text = GetFormattedTime();
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if(SceneManager.GetActiveScene().name == "MainGame")
+        {
+            timerText = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
+
+            ResetTimer();
+        }
+
+
         if (SceneManager.GetActiveScene().name == "GameOver")
         {
-            StopAllCoroutines();
+            finalTimeText = GameObject.Find("TimePlayed").GetComponent<TextMeshProUGUI>();
+            if (finalTimeText != null)
+            {
+                finalTimeText.text = "Final Time: " + GetFormattedTime();
+            }
+        }
+    }
+
+    public string GetFormattedTime()
+    {
+        int minutes = Mathf.FloorToInt(totalTime / 60F);
+        int seconds = Mathf.FloorToInt(totalTime % 60F);
+        int milliseconds = Mathf.FloorToInt((totalTime * 100F) % 100F);
+        return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
+    }
+
+    public void ResetTimer()
+    {
+        totalTime = 0f;
+        isRunning = true;
+
+        if (timerText != null)
+        {
+            timerText.text = GetFormattedTime();
         }
     }
 }
