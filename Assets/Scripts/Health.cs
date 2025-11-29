@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class Health : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             health--;
@@ -20,22 +18,33 @@ public class Health : MonoBehaviour
             Spawner.spawnCount--;
             healthText.text = "Health: " + health.ToString();
             Destroy(collision.gameObject);
+
             if (health <= 0)
             {
-                Destroy(gameObject);
-                //Spawner.spawnCount--;
                 healthText.text = "Health: 0";
                 HandleGameOver();
             }
-            
         }
-        
     }
 
-    private async void HandleGameOver()
+    private void HandleGameOver()
     {
         Timer.Instance.StopTimer();
-        await Task.Delay(2000);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+
+        GameObject go = new GameObject("GameOverHandler");
+        GameOverHandler handler = go.AddComponent<GameOverHandler>();
+        handler.StartCoroutine(handler.GameOverRoutine(deathSound.clip.length));
+
+        Destroy(gameObject);
+    }
+}
+
+public class GameOverHandler : MonoBehaviour
+{
+    public IEnumerator GameOverRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("GameOver");
+        Destroy(gameObject);
     }
 }
