@@ -17,14 +17,14 @@ public class Bullet : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Bullet") || other.CompareTag("Player")) return;
-        if(!other.CompareTag("Wall"))
-        {
-            Destroy(other.gameObject);
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.CompareTag("Bullet") || other.CompareTag("Player")) return;
+    //    if(!other.CompareTag("Wall"))
+    //    {
+    //        Destroy(other.gameObject);
 
-        }
-        Destroy(gameObject);
-    }
+    //    }
+    //    Destroy(gameObject);
+    //}
 }

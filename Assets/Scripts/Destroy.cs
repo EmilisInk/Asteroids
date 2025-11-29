@@ -18,7 +18,6 @@ public class Destroy : MonoBehaviour
             Destroy(gameObject);
             Destroy(other.gameObject);
             Instantiate(toSpawnPrefab, transform.position, transform.rotation);
-
         }
     }
 }

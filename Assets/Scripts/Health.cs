@@ -8,11 +8,15 @@ public class Health : MonoBehaviour
 {
     public int health = 3;
     public TextMeshProUGUI healthText;
+    public AudioSource deathSound;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.CompareTag("Asteroid"))
         {
             health--;
+            deathSound.Play();
             Spawner.spawnCount--;
             healthText.text = "Health: " + health.ToString();
             Destroy(collision.gameObject);
